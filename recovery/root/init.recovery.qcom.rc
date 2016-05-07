@@ -1,0 +1,24 @@
+service qseecomd /sbin/qseecomd
+
+on init
+    mkdir /vendor/firmware
+    mkdir /vendor/firmware/keymaster
+    symlink /firmware/image/keymaster.b00 /vendor/firmware/keymaster/keymaster.b00
+    symlink /firmware/image/keymaster.b01 /vendor/firmware/keymaster/keymaster.b01
+    symlink /firmware/image/keymaster.b02 /vendor/firmware/keymaster/keymaster.b02
+    symlink /firmware/image/keymaster.b03 /vendor/firmware/keymaster/keymaster.b03
+    symlink /firmware/image/keymaster.mdt /vendor/firmware/keymaster/keymaster.mdt
+
+on post-fs
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 960000
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_setspeed 960000
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu4/online 0
+    write /sys/devices/system/cpu/cpu5/online 0
+    write /sys/devices/system/cpu/cpu6/online 0
+    write /sys/devices/system/cpu/cpu7/online 0
+
